@@ -53,24 +53,21 @@ const parseDatum = (
 	)
 }
 
-const parseData = (ColumnInfo: TimestreamQuery.ColumnInfoList) => (
-	Data: TimestreamQuery.DatumList,
-) =>
+const parseData = <T extends Record<string, unknown>>(
+	ColumnInfo: TimestreamQuery.ColumnInfoList,
+) => (Data: TimestreamQuery.DatumList): T =>
 	Data.reduce(
 		(record, datum, k) => ({
 			...record,
 			[ColumnInfo[k].Name as string]: parseDatum(datum, ColumnInfo[k]),
 		}),
-		{} as Record<string, any>,
+		{} as T,
 	)
 
-export const parseResult = ({
+export const parseResult = <T extends Record<string, unknown>>({
 	Rows,
 	ColumnInfo,
-}: TimestreamQuery.QueryResponse): Record<
-	string,
-	ScalarTypes | ScalarTypes[]
->[] => {
-	const parse = parseData(ColumnInfo)
+}: TimestreamQuery.QueryResponse): T[] => {
+	const parse = parseData<T>(ColumnInfo)
 	return Rows.map(({ Data }) => parse(Data))
 }
