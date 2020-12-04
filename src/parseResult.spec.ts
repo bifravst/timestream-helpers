@@ -85,7 +85,7 @@ describe('parseResult', () => {
 										ScalarValue: '0.0',
 									},
 									{
-										ScalarValue: '0.0',
+										NullValue: true,
 									},
 								],
 							},
@@ -357,7 +357,14 @@ describe('parseResult', () => {
 			}),
 		).toEqual([
 			{
-				value: [10.445680618286135, 0.0, 0.0, 63.42264354721504, 0.0, 0.0],
+				value: [
+					10.445680618286135,
+					0.0,
+					0.0,
+					63.42264354721504,
+					0.0,
+					undefined,
+				],
 				keys: [
 					'gps.lng',
 					'gps.spd',

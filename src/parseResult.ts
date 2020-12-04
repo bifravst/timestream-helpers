@@ -1,6 +1,6 @@
 import { TimestreamQuery } from 'aws-sdk'
 
-type ScalarTypes = boolean | Date | number | string
+type ScalarTypes = boolean | Date | number | string | undefined
 
 const parseValue = (
 	value: string,
@@ -31,19 +31,21 @@ const parseDatum = (
 	datum: TimestreamQuery.Datum,
 	columnInfo: TimestreamQuery.ColumnInfo,
 ): ScalarTypes | ScalarTypes[] => {
+	if (datum.NullValue === true) return undefined
 	if (datum.ScalarValue !== undefined)
 		return parseValue(
 			datum.ScalarValue,
 			columnInfo.Type.ScalarType as TimestreamQuery.ScalarType,
 		)
 	if (datum.ArrayValue !== undefined) {
-		const a = datum.ArrayValue.map((d) =>
-			parseValue(
+		const a = datum.ArrayValue.map((d) => {
+			if (d.NullValue === true) return undefined
+			return parseValue(
 				d.ScalarValue as string,
 				columnInfo.Type.ArrayColumnInfo?.Type
 					.ScalarType as TimestreamQuery.ScalarType,
-			),
-		)
+			)
+		})
 		return a
 	}
 	throw new Error(
