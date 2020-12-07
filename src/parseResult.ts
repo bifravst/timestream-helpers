@@ -12,7 +12,7 @@ const parseValue = (
 		case 'DOUBLE':
 			return parseFloat(value)
 		case 'TIMESTAMP':
-			return new Date(value.replace(' ', 'T'))
+			return new Date(`${value.replace(' ', 'T')}Z`)
 		case 'INTEGER':
 			return parseInt(value, 10)
 		case 'UNKNOWN':
