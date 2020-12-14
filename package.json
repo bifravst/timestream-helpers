@@ -25,7 +25,7 @@
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "aws-sdk": "2.804.0"
+    "aws-sdk": "2.808.0"
   },
   "devDependencies": {
     "@bifravst/code-style": "8.0.134",
@@ -34,7 +34,7 @@
     "@commitlint/config-angular": "11.0.0",
     "@types/backoff": "2.5.1",
     "@types/jest": "26.0.19",
-    "@types/node": "14.14.10",
+    "@types/node": "14.14.12",
     "eslint": "7.15.0",
     "husky": "4.3.5",
     "jest": "26.6.3",
