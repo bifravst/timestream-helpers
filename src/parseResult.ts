@@ -1,11 +1,13 @@
-import { TimestreamQuery } from 'aws-sdk'
+import {
+	ScalarType,
+	Datum,
+	ColumnInfo,
+	QueryResponse,
+} from '@aws-sdk/client-timestream-query'
 
 type ScalarTypes = boolean | Date | number | string | undefined
 
-const parseValue = (
-	value: string,
-	type: TimestreamQuery.ScalarType,
-): ScalarTypes => {
+const parseValue = (value: string, type: ScalarType): ScalarTypes => {
 	switch (type) {
 		case 'BOOLEAN':
 			return value === 'true'
@@ -28,22 +30,21 @@ const parseValue = (
 }
 
 const parseDatum = (
-	datum: TimestreamQuery.Datum,
-	columnInfo: TimestreamQuery.ColumnInfo,
+	datum: Datum,
+	columnInfo: ColumnInfo,
 ): ScalarTypes | ScalarTypes[] => {
 	if (datum.NullValue === true) return undefined
 	if (datum.ScalarValue !== undefined)
 		return parseValue(
 			datum.ScalarValue,
-			columnInfo.Type.ScalarType as TimestreamQuery.ScalarType,
+			columnInfo.Type?.ScalarType as ScalarType,
 		)
 	if (datum.ArrayValue !== undefined) {
 		const a = datum.ArrayValue.map((d) => {
 			if (d.NullValue === true) return undefined
 			return parseValue(
 				d.ScalarValue as string,
-				columnInfo.Type.ArrayColumnInfo?.Type
-					.ScalarType as TimestreamQuery.ScalarType,
+				columnInfo.Type?.ArrayColumnInfo?.Type?.ScalarType as ScalarType,
 			)
 		})
 		return a
@@ -56,8 +57,8 @@ const parseDatum = (
 }
 
 const parseData = <T extends Record<string, unknown>>(
-	ColumnInfo: TimestreamQuery.ColumnInfoList,
-) => (Data: TimestreamQuery.DatumList): T =>
+	ColumnInfo: ColumnInfo[],
+) => (Data: Datum[]): T =>
 	Data.reduce(
 		(record, datum, k) => ({
 			...record,
@@ -69,7 +70,7 @@ const parseData = <T extends Record<string, unknown>>(
 export const parseResult = <T extends Record<string, unknown>>({
 	Rows,
 	ColumnInfo,
-}: TimestreamQuery.QueryResponse): T[] => {
-	const parse = parseData<T>(ColumnInfo)
-	return Rows.map(({ Data }) => parse(Data))
+}: QueryResponse): T[] => {
+	const parse = parseData<T>(ColumnInfo ?? [])
+	return Rows?.map(({ Data }) => parse(Data ?? [])) ?? []
 }
