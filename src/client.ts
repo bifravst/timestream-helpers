@@ -1,6 +1,7 @@
 import {
 	TimestreamWriteClient,
 	DescribeEndpointsCommand as DescribeWriteEndpointsCommand,
+	TimestreamWriteClientConfig,
 } from '@aws-sdk/client-timestream-write'
 
 import {
@@ -12,17 +13,23 @@ import {
  * Discover the endpoint for writing to Timestream and return a client
  */
 export const writeClient = async (
-	{ defaultRegion }: { defaultRegion: string } = { defaultRegion: 'us-east-1' },
+	args: Partial<TimestreamWriteClientConfig> = {},
+	{ defaultRegion }: { defaultRegion: string } = {
+		defaultRegion: 'us-east-1',
+	},
 ): Promise<TimestreamWriteClient> =>
-	new TimestreamWriteClient({})
+	new TimestreamWriteClient(args)
 		.send(new DescribeWriteEndpointsCommand({}))
 		.then(
 			({ Endpoints }) =>
 				new TimestreamWriteClient({
 					endpoint: `https://${
 						Endpoints?.[0].Address ??
-						`ingest-cell1.timestream.${defaultRegion}.amazonaws.com`
+						`ingest-cell1.timestream.${
+							args.region ?? defaultRegion
+						}.amazonaws.com`
 					}`,
+					...args,
 				}),
 		)
 
@@ -30,16 +37,22 @@ export const writeClient = async (
  * Discover the endpoint for querying Timestream and return a client
  */
 export const queryClient = async (
-	{ defaultRegion }: { defaultRegion: string } = { defaultRegion: 'us-east-1' },
+	args: Partial<TimestreamWriteClientConfig> = {},
+	{ defaultRegion }: { defaultRegion: string } = {
+		defaultRegion: 'us-east-1',
+	},
 ): Promise<TimestreamQueryClient> =>
-	new TimestreamQueryClient({})
+	new TimestreamQueryClient(args)
 		.send(new DescribeQueryEndpointsCommand({}))
 		.then(
 			({ Endpoints }) =>
 				new TimestreamQueryClient({
 					endpoint: `https://${
 						Endpoints?.[0].Address ??
-						`query-cell1.timestream.${defaultRegion}.amazonaws.com`
+						`query-cell1.timestream.${
+							args.region ?? defaultRegion
+						}.amazonaws.com`
 					}`,
+					...args,
 				}),
 		)
