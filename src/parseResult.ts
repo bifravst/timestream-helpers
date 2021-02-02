@@ -50,7 +50,7 @@ const parseDatum = (
 		return a
 	}
 	throw new Error(
-		`[@bifravst/timestream-helper:parseDatum] Unexpected datum: ${JSON.stringify(
+		`[@nordicsemiconductor/timestream-helper:parseDatum] Unexpected datum: ${JSON.stringify(
 			datum,
 		)}`,
 	)
