@@ -1,3 +1,6 @@
+> **:truck: moved to https://github.com/NordicSemiconductor/cloud-aws-timestream-helpers-js**  
+> :information_source: [more info](https://github.com/bifravst/bifravst/issues/56)
+
 # Timestream Helpers [![npm version](https://img.shields.io/npm/v/@bifravst/timestream-helpers.svg)](https://www.npmjs.com/package/@bifravst/timestream-helpers)
 
 [![GitHub Actions](https://github.com/bifravst/timestream-helpers/workflows/Test%20and%20Release/badge.svg)](https://github.com/bifravst/timestream-helpers/actions)
