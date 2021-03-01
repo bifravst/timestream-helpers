@@ -1,11 +1,14 @@
 import {
-	ScalarType,
-	Datum,
 	ColumnInfo,
+	Datum,
 	QueryResponse,
+	ScalarType,
+	TimeSeriesDataPoint,
 } from '@aws-sdk/client-timestream-query'
 
 type ScalarTypes = boolean | Date | number | string | undefined
+
+type TimeSeriesDatum = { time: Date; value: ScalarTypes }
 
 const parseValue = (value: string, type: ScalarType): ScalarTypes => {
 	switch (type) {
@@ -32,7 +35,7 @@ const parseValue = (value: string, type: ScalarType): ScalarTypes => {
 const parseDatum = (
 	datum: Datum,
 	columnInfo: ColumnInfo,
-): ScalarTypes | ScalarTypes[] => {
+): ScalarTypes | ScalarTypes[] | TimeSeriesDatum[] => {
 	if (datum.NullValue === true) return undefined
 	if (datum.ScalarValue !== undefined)
 		return parseValue(
@@ -40,14 +43,51 @@ const parseDatum = (
 			columnInfo.Type?.ScalarType as ScalarType,
 		)
 	if (datum.ArrayValue !== undefined) {
-		const a = datum.ArrayValue.map((d) => {
+		return datum.ArrayValue.map((d: Datum) => {
 			if (d.NullValue === true) return undefined
 			return parseValue(
 				d.ScalarValue as string,
 				columnInfo.Type?.ArrayColumnInfo?.Type?.ScalarType as ScalarType,
 			)
 		})
-		return a
+	}
+	if (datum.TimeSeriesValue !== undefined) {
+		return datum.TimeSeriesValue.reduce(
+			(
+				result: { time: Date; value: ScalarTypes }[],
+				timeSeriesDataPoint: TimeSeriesDataPoint,
+			) => {
+				if (
+					timeSeriesDataPoint.Time !== undefined &&
+					timeSeriesDataPoint.Value !== undefined
+				) {
+					const time = parseValue(
+						timeSeriesDataPoint.Time,
+						ScalarType.TIMESTAMP,
+					) as Date
+
+					if (columnInfo.Type?.TimeSeriesMeasureValueColumnInfo != undefined) {
+						result.push({
+							time,
+							value: parseDatum(
+								timeSeriesDataPoint.Value,
+								columnInfo.Type.TimeSeriesMeasureValueColumnInfo,
+							) as ScalarType,
+						})
+					} else {
+						if (timeSeriesDataPoint.Value.ScalarValue !== undefined) {
+							const value = parseValue(
+								timeSeriesDataPoint.Value.ScalarValue,
+								ScalarType.DOUBLE,
+							)
+							result.push({ time, value })
+						}
+					}
+				}
+				return result
+			},
+			[],
+		)
 	}
 	throw new Error(
 		`[@nordicsemiconductor/timestream-helper:parseDatum] Unexpected datum: ${JSON.stringify(
