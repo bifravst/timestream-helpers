@@ -425,4 +425,117 @@ describe('parseResult', () => {
 			},
 		])
 	})
+	it('parses a Timestream timeseries result into an array of timeseries values', () => {
+		const timestreamQueryResult = {
+			ColumnInfo: [
+				{ Name: 'device', Type: { ScalarType: 'VARCHAR' } },
+				{ Name: 'measure_name', Type: { ScalarType: 'VARCHAR' } },
+				{
+					Name: 'timeseries',
+					Type: {
+						TimeSeriesMeasureValueColumnInfo: {
+							Type: { ScalarType: 'DOUBLE' },
+						},
+					},
+				},
+			],
+			QueryId:
+				'AEDQCAM2RU6BAPTJ5XWYG4DPUBD7MV7CMCQ6OFJO5MJLI5YPWA334EL64ZQM4MA',
+			Rows: [
+				{
+					Data: [
+						{
+							ScalarValue: 'Device1',
+						},
+						{
+							ScalarValue: 'speed',
+						},
+						{
+							TimeSeriesValue: [
+								{
+									Time: '2021-02-25 09:47:40.000000000',
+									Value: { ScalarValue: '1.0' },
+								},
+								{
+									Time: '2021-02-25 09:47:50.000000000',
+									Value: { ScalarValue: '2.0' },
+								},
+								{
+									Time: '2021-02-25 09:48:00.000000000',
+									Value: { ScalarValue: '3.0' },
+								},
+							],
+						},
+					],
+				},
+				{
+					Data: [
+						{
+							ScalarValue: 'Device2',
+						},
+						{
+							ScalarValue: 'speed',
+						},
+						{
+							TimeSeriesValue: [
+								{
+									Time: '2021-02-25 09:47:40.000000000',
+									Value: { ScalarValue: '4.0' },
+								},
+								{
+									Time: '2021-02-25 09:47:50.000000000',
+									Value: { ScalarValue: '5.0' },
+								},
+								{
+									Time: '2021-02-25 09:48:00.000000000',
+									Value: { ScalarValue: '6.0' },
+								},
+							],
+						},
+					],
+				},
+			],
+		}
+
+		const queryResult = parseResult(timestreamQueryResult)
+
+		expect(queryResult).toEqual([
+			{
+				device: 'Device1',
+				measure_name: 'speed',
+				timeseries: [
+					{
+						time: new Date('2021-02-25 09:47:40.000000000Z'),
+						value: 1.0,
+					},
+					{
+						time: new Date('2021-02-25 09:47:50.000000000Z'),
+						value: 2.0,
+					},
+					{
+						time: new Date('2021-02-25 09:48:00.000000000Z'),
+						value: 3.0,
+					},
+				],
+			},
+			{
+				device: 'Device2',
+				measure_name: 'speed',
+				timeseries: [
+					{
+						time: new Date('2021-02-25 09:47:40.000000000Z'),
+						value: 4.0,
+					},
+					{
+						time: new Date('2021-02-25 09:47:50.000000000Z'),
+						value: 5.0,
+					},
+					{
+						time: new Date('2021-02-25 09:48:00.000000000Z'),
+						value: 6.0,
+					},
+				],
+			},
+		])
+	})
 })
