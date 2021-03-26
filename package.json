@@ -38,7 +38,7 @@
     "@types/backoff": "2.5.1",
     "@types/jest": "26.0.22",
     "@types/node": "14.14.36",
-    "eslint": "7.22.0",
+    "eslint": "7.23.0",
     "husky": "5.2.0",
     "jest": "26.6.3",
     "lint-staged": "10.5.4",
