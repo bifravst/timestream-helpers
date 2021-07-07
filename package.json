@@ -35,7 +35,7 @@
     "@commitlint/config-angular": "12.1.4",
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "9.0.4",
     "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "8.0.1",
-    "@types/backoff": "2.5.1",
+    "@types/backoff": "2.5.2",
     "@types/jest": "26.0.24",
     "@types/node": "14.17.5",
     "eslint": "7.30.0",
