@@ -27,8 +27,8 @@
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@aws-sdk/client-timestream-query": "3.40.0",
-    "@aws-sdk/client-timestream-write": "3.40.0"
+    "@aws-sdk/client-timestream-query": "3.41.0",
+    "@aws-sdk/client-timestream-write": "3.41.0"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "9.2.12",
