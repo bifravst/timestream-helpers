@@ -35,7 +35,7 @@
     "@types/backoff": "2.5.2",
     "@types/jest": "27.4.0",
     "@types/node": "16.11.19",
-    "jest": "27.4.6",
+    "jest": "27.4.7",
     "ts-jest": "27.1.2"
   },
   "lint-staged": {
