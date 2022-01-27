@@ -12,4 +12,4 @@ Helper functions which simplify working with AWS Timestream.
 
 ## Installation
 
-    npm i --save @nordicsemiconductor/timestream-helpers
+    npm i --save --save-exact @nordicsemiconductor/timestream-helpers
