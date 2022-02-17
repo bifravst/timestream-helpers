@@ -1,4 +1,4 @@
-import { MeasureValueType } from '@aws-sdk/client-timestream-write'
+import { MeasureValueType, TimeUnit } from '@aws-sdk/client-timestream-write'
 import { toRecord } from '.'
 
 describe('toRecord()', () => {
@@ -22,6 +22,7 @@ describe('toRecord()', () => {
 			MeasureValue: `3.3`,
 			MeasureValueType: MeasureValueType.DOUBLE,
 			Time: ts.toString(),
+			TimeUnit: TimeUnit.MILLISECONDS,
 		})
 	})
 	it('should ignore sensor data if the value is not defined', () => {

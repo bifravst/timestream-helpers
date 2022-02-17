@@ -1,5 +1,10 @@
-import { _Record } from '@aws-sdk/client-timestream-write'
+import { TimeUnit, _Record } from '@aws-sdk/client-timestream-write'
 import { toTimestreamType } from './toTimestreamType'
+
+export type RecordWithTime = _Record & {
+	Time: Required<_Record['Time']>
+	TimeUnit: Required<_Record['TimeUnit']>
+}
 
 export const toRecord = ({
 	name,
@@ -11,7 +16,7 @@ export const toRecord = ({
 	ts: number
 	v?: { toString: () => string }
 	dimensions?: Record<string, string>
-}): _Record | undefined => {
+}): RecordWithTime | undefined => {
 	if (v === undefined) return
 	return {
 		Dimensions: Object.entries(dimensions ?? {}).map(([Name, Value]) => ({
@@ -22,5 +27,6 @@ export const toRecord = ({
 		MeasureValue: v.toString(),
 		MeasureValueType: toTimestreamType(v),
 		Time: ts.toString(),
+		TimeUnit: TimeUnit.MILLISECONDS,
 	}
 }
