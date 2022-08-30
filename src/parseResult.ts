@@ -96,16 +96,16 @@ const parseDatum = (
 	)
 }
 
-const parseData = <T extends Record<string, unknown>>(
-	ColumnInfo: ColumnInfo[],
-) => (Data: Datum[]): T =>
-	Data.reduce(
-		(record, datum, k) => ({
-			...record,
-			[ColumnInfo[k].Name as string]: parseDatum(datum, ColumnInfo[k]),
-		}),
-		{} as T,
-	)
+const parseData =
+	<T extends Record<string, unknown>>(ColumnInfo: ColumnInfo[]) =>
+	(Data: Datum[]): T =>
+		Data.reduce(
+			(record, datum, k) => ({
+				...record,
+				[ColumnInfo[k].Name as string]: parseDatum(datum, ColumnInfo[k]),
+			}),
+			{} as T,
+		)
 
 export const parseResult = <T extends Record<string, unknown>>({
 	Rows,
