@@ -1,12 +1,12 @@
 import {
-	TimestreamWriteClient,
 	DescribeEndpointsCommand as DescribeWriteEndpointsCommand,
+	TimestreamWriteClient,
 	TimestreamWriteClientConfig,
 } from '@aws-sdk/client-timestream-write'
 
 import {
-	TimestreamQueryClient,
 	DescribeEndpointsCommand as DescribeQueryEndpointsCommand,
+	TimestreamQueryClient,
 } from '@aws-sdk/client-timestream-query'
 
 /**
