@@ -27,7 +27,7 @@
     "@aws-sdk/client-timestream-write": ">= 3 < 4"
   },
   "devDependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.134",
+    "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.135",
     "@swc/jest": "0.2.23",
     "@types/backoff": "2.5.2",
     "@types/jest": "29.2.0",
