@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.60",
-    "@swc/jest": "0.2.26",
+    "@swc/jest": "0.2.27",
     "@types/backoff": "2.5.2",
     "@types/jest": "29.5.3",
     "@types/node": "18.16.19",
