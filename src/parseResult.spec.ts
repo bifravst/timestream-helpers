@@ -1,8 +1,10 @@
 import { parseResult } from './parseResult.js'
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 
-describe('parseResult', () => {
-	it('parses a Timestream result into an array of values', () => {
-		expect(
+void void describe('parseResult', () => {
+	void it('parses a Timestream result into an array of values', () => {
+		assert.deepEqual(
 			parseResult({
 				QueryId:
 					'AEDQCAMYRSDE6KAZR7H7T5DB2WRTNJTO7S2S33ROHNVB3UIQ35QCWEFO52EWWOA',
@@ -48,19 +50,21 @@ describe('parseResult', () => {
 					CumulativeBytesMetered: 10000000,
 				},
 			}),
-		).toEqual([
-			{
-				date: new Date('2020-11-27T11:48:25.875000000Z'),
-				value: 1,
-			},
-			{
-				date: new Date('2020-11-27T11:48:26.390000000Z'),
-				value: 0,
-			},
-		])
+			[
+				{
+					date: new Date('2020-11-27T11:48:25.875000000Z'),
+					value: 1,
+				},
+				{
+					date: new Date('2020-11-27T11:48:26.390000000Z'),
+					value: 0,
+				},
+			],
+		)
 	})
-	it('parses a Timestream result with array values into an array of values', () => {
-		expect(
+
+	void it('parses a Timestream result with array values into an array of values', () => {
+		assert.deepEqual(
 			parseResult({
 				QueryId:
 					'AEDQCAMYTX3JJZJFMU5ZTAVMZU4U7JWRY2NJSFPC4FKM7SFOLUREP7WTUTBO2RI',
@@ -355,77 +359,79 @@ describe('parseResult', () => {
 					CumulativeBytesMetered: 10000000,
 				},
 			}),
-		).toEqual([
-			{
-				value: [
-					10.445680618286135,
-					0.0,
-					0.0,
-					63.42264354721504,
-					0.0,
-					undefined,
-				],
-				keys: [
-					'gps.lng',
-					'gps.spd',
-					'gps.hdg',
-					'gps.lat',
-					'gps.alt',
-					'gps.acc',
-				],
-				time: new Date('2020-11-30 14:31:12.494000000Z'),
-			},
-			{
-				value: [0.0, 0.0, 0.0, 10.432462692260744, 63.41834229712906, 0.0],
-				keys: [
-					'gps.alt',
-					'gps.spd',
-					'gps.acc',
-					'gps.lng',
-					'gps.lat',
-					'gps.hdg',
-				],
-				time: new Date('2020-11-30 14:31:10.863000000Z'),
-			},
-			{
-				value: [0.0, 10.430212100000002, 63.4249408, 0.0, 0.0, 0.0],
-				keys: [
-					'gps.hdg',
-					'gps.lng',
-					'gps.lat',
-					'gps.alt',
-					'gps.spd',
-					'gps.acc',
-				],
-				time: new Date('2020-11-30 14:31:10.582000000Z'),
-			},
-			{
-				value: [0.0, 63.42003215091831, 0.0, 0.0, 0.0, 10.434179306030275],
-				keys: [
-					'gps.spd',
-					'gps.lat',
-					'gps.hdg',
-					'gps.acc',
-					'gps.alt',
-					'gps.lng',
-				],
-				time: new Date('2020-11-30 14:31:10.129000000Z'),
-			},
-			{
-				value: [63.4249408, 0.0, 0.0, 0.0, 10.430212100000002, 0.0],
-				keys: [
-					'gps.lat',
-					'gps.alt',
-					'gps.acc',
-					'gps.spd',
-					'gps.lng',
-					'gps.hdg',
-				],
-				time: new Date('2020-11-30 14:31:08.617000000Z'),
-			},
-		])
+			[
+				{
+					value: [
+						10.445680618286135,
+						0.0,
+						0.0,
+						63.42264354721504,
+						0.0,
+						undefined,
+					],
+					keys: [
+						'gps.lng',
+						'gps.spd',
+						'gps.hdg',
+						'gps.lat',
+						'gps.alt',
+						'gps.acc',
+					],
+					time: new Date('2020-11-30 14:31:12.494000000Z'),
+				},
+				{
+					value: [0.0, 0.0, 0.0, 10.432462692260744, 63.41834229712906, 0.0],
+					keys: [
+						'gps.alt',
+						'gps.spd',
+						'gps.acc',
+						'gps.lng',
+						'gps.lat',
+						'gps.hdg',
+					],
+					time: new Date('2020-11-30 14:31:10.863000000Z'),
+				},
+				{
+					value: [0.0, 10.430212100000002, 63.4249408, 0.0, 0.0, 0.0],
+					keys: [
+						'gps.hdg',
+						'gps.lng',
+						'gps.lat',
+						'gps.alt',
+						'gps.spd',
+						'gps.acc',
+					],
+					time: new Date('2020-11-30 14:31:10.582000000Z'),
+				},
+				{
+					value: [0.0, 63.42003215091831, 0.0, 0.0, 0.0, 10.434179306030275],
+					keys: [
+						'gps.spd',
+						'gps.lat',
+						'gps.hdg',
+						'gps.acc',
+						'gps.alt',
+						'gps.lng',
+					],
+					time: new Date('2020-11-30 14:31:10.129000000Z'),
+				},
+				{
+					value: [63.4249408, 0.0, 0.0, 0.0, 10.430212100000002, 0.0],
+					keys: [
+						'gps.lat',
+						'gps.alt',
+						'gps.acc',
+						'gps.spd',
+						'gps.lng',
+						'gps.hdg',
+					],
+					time: new Date('2020-11-30 14:31:08.617000000Z'),
+				},
+			],
+		)
 	})
-	it('parses a Timestream timeseries result into an array of timeseries values', () => {
+
+	void it('parses a Timestream timeseries result into an array of timeseries values', () => {
 		const timestreamQueryResult = {
 			ColumnInfo: [
 				{ Name: 'device', Type: { ScalarType: 'VARCHAR' } },
@@ -499,7 +505,7 @@ describe('parseResult', () => {
 
 		const queryResult = parseResult(timestreamQueryResult)
 
-		expect(queryResult).toEqual([
+		assert.deepEqual(queryResult, [
 			{
 				device: 'Device1',
 				measure_name: 'speed',

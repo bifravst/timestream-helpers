@@ -1,7 +1,7 @@
 import {
 	DescribeEndpointsCommand as DescribeWriteEndpointsCommand,
 	TimestreamWriteClient,
-	TimestreamWriteClientConfig,
+	type TimestreamWriteClientConfig,
 } from '@aws-sdk/client-timestream-write'
 
 import {
@@ -24,7 +24,7 @@ export const writeClient = async (
 			({ Endpoints }) =>
 				new TimestreamWriteClient({
 					endpoint: `https://${
-						Endpoints?.[0].Address ??
+						Endpoints?.[0]?.Address ??
 						`ingest-cell1.timestream.${
 							args.region ?? defaultRegion
 						}.amazonaws.com`
@@ -48,7 +48,7 @@ export const queryClient = async (
 			({ Endpoints }) =>
 				new TimestreamQueryClient({
 					endpoint: `https://${
-						Endpoints?.[0].Address ??
+						Endpoints?.[0]?.Address ??
 						`query-cell1.timestream.${
 							args.region ?? defaultRegion
 						}.amazonaws.com`

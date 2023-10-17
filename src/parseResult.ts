@@ -102,7 +102,10 @@ const parseData =
 		Data.reduce(
 			(record, datum, k) => ({
 				...record,
-				[ColumnInfo[k].Name as string]: parseDatum(datum, ColumnInfo[k]),
+				[ColumnInfo[k]?.Name as string]: parseDatum(
+					datum,
+					ColumnInfo[k] as ColumnInfo,
+				),
 			}),
 			{} as T,
 		)
