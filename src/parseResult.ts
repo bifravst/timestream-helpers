@@ -1,9 +1,9 @@
 import {
-	ColumnInfo,
-	Datum,
-	QueryResponse,
+	type ColumnInfo,
+	type Datum,
+	type QueryResponse,
 	ScalarType,
-	TimeSeriesDataPoint,
+	type TimeSeriesDataPoint,
 } from '@aws-sdk/client-timestream-query'
 
 type ScalarTypes = boolean | Date | number | string | undefined

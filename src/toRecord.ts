@@ -1,4 +1,4 @@
-import { TimeUnit, _Record } from '@aws-sdk/client-timestream-write'
+import { TimeUnit, type _Record } from '@aws-sdk/client-timestream-write'
 import { toTimestreamType } from './toTimestreamType.js'
 
 export type RecordWithTime = _Record & {

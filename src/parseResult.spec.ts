@@ -1,6 +1,7 @@
 import { parseResult } from './parseResult.js'
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
+import { ScalarType } from '@aws-sdk/client-timestream-query'
 
 void void describe('parseResult', () => {
 	void it('parses a Timestream result into an array of values', () => {
@@ -434,13 +435,13 @@ void void describe('parseResult', () => {
 	void it('parses a Timestream timeseries result into an array of timeseries values', () => {
 		const timestreamQueryResult = {
 			ColumnInfo: [
-				{ Name: 'device', Type: { ScalarType: 'VARCHAR' } },
-				{ Name: 'measure_name', Type: { ScalarType: 'VARCHAR' } },
+				{ Name: 'device', Type: { ScalarType: ScalarType.VARCHAR } },
+				{ Name: 'measure_name', Type: { ScalarType: ScalarType.VARCHAR } },
 				{
 					Name: 'timeseries',
 					Type: {
 						TimeSeriesMeasureValueColumnInfo: {
-							Type: { ScalarType: 'DOUBLE' },
+							Type: { ScalarType: ScalarType.DOUBLE },
 						},
 					},
 				},
