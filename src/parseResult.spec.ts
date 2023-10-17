@@ -1,4 +1,4 @@
-import { parseResult } from './parseResult'
+import { parseResult } from './parseResult.js'
 
 describe('parseResult', () => {
 	it('parses a Timestream result into an array of values', () => {
