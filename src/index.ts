@@ -1,5 +1,0 @@
-export * from './client.js'
-export * from './index.js'
-export * from './parseResult.js'
-export * from './toRecord.js'
-export * from './toTimestreamType.js'
