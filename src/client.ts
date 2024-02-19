@@ -26,7 +26,7 @@ export const writeClient = async (
 					endpoint: `https://${
 						Endpoints?.[0]?.Address ??
 						`ingest-cell1.timestream.${
-							args.region ?? defaultRegion
+							(args.region ?? defaultRegion) as string
 						}.amazonaws.com`
 					}`,
 					...args,
@@ -50,7 +50,7 @@ export const queryClient = async (
 					endpoint: `https://${
 						Endpoints?.[0]?.Address ??
 						`query-cell1.timestream.${
-							args.region ?? defaultRegion
+							(args.region ?? defaultRegion) as string
 						}.amazonaws.com`
 					}`,
 					...args,
