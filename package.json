@@ -40,7 +40,7 @@
     "@types/backoff": "2.5.5",
     "@types/node": "20.12.11",
     "husky": "9.0.11",
-    "tsx": "4.9.4"
+    "tsx": "4.10.0"
   },
   "lint-staged": {
     "*.ts": [
