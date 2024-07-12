@@ -1,4 +1,4 @@
-# Timestream Helpers [![npm version](https://img.shields.io/npm/v/rsrp-bar/timestream-helpers.svg)](https://www.npmjs.com/package/rsrp-bar/timestream-helpers)
+# Timestream Helpers [![npm version](https://img.shields.io/npm/v/@bifravst/timestream-helpers.svg)](https://www.npmjs.com/package/@bifravst/timestream-helpers)
 
 [![GitHub Actions](https://github.com/bifravst/timestream-helpers/workflows/Test%20and%20Release/badge.svg)](https://github.com/bifravst/timestream-helpers/actions)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
@@ -11,4 +11,4 @@ Helper functions which simplify working with AWS Timestream.
 
 ## Installation
 
-    npm i --save --save-exact rsrp-bar/timestream-helpers
+    npm i --save --save-exact @bifravst/timestream-helpers
