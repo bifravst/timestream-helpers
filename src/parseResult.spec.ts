@@ -1,7 +1,7 @@
-import { parseResult } from './parseResult.js'
-import { describe, it } from 'node:test'
-import assert from 'node:assert'
 import { ScalarType } from '@aws-sdk/client-timestream-query'
+import assert from 'node:assert'
+import { describe, it } from 'node:test'
+import { parseResult } from './parseResult.js'
 
 void void describe('parseResult', () => {
 	void it('parses a Timestream result into an array of values', () => {
