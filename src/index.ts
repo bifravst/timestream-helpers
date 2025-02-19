@@ -1,4 +1,5 @@
 export * from './client.js'
+export * from './getAvailableColumns.js'
 export * from './index.js'
 export * from './parseResult.js'
 export * from './toRecord.js'
