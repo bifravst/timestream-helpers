@@ -38,7 +38,7 @@
     "@bifravst/prettier-config": "1.1.7",
     "@commitlint/config-conventional": "19.7.1",
     "@types/backoff": "2.5.5",
-    "@types/node": "22.13.7",
+    "@types/node": "22.13.8",
     "commitlint": "19.7.1",
     "husky": "9.1.7",
     "tsx": "4.19.3"
