@@ -1,5 +1,5 @@
 import { TimeUnit, type _Record } from '@aws-sdk/client-timestream-write'
-import { toTimestreamType } from './toTimestreamType.js'
+import { toTimestreamType } from './toTimestreamType.ts'
 
 export type RecordWithTime = _Record & {
 	Time: Required<_Record['Time']>

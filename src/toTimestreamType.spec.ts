@@ -1,6 +1,6 @@
 import assert from 'node:assert'
 import { describe, it } from 'node:test'
-import { toTimestreamType } from './toTimestreamType.js'
+import { toTimestreamType } from './toTimestreamType.ts'
 void describe('toTimestreamType', () => {
 	for (const [v, expected] of [
 		[true, 'BOOLEAN'],

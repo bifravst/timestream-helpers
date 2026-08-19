@@ -1,7 +1,7 @@
 import { MeasureValueType, TimeUnit } from '@aws-sdk/client-timestream-write'
 import assert from 'node:assert'
 import { describe, it } from 'node:test'
-import { toRecord } from './toRecord.js'
+import { toRecord } from './toRecord.ts'
 
 void describe('toRecord()', () => {
 	void it('should convert sensor data to a timestream record', () => {
